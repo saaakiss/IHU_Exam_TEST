@@ -104,8 +104,6 @@ public class FetchMerchantsTask extends AsyncTask<String,Void,ArrayList<Merchant
             }
             merchantJsonStr = buffer.toString();
 
-            Log.v("Sakis" , merchantJsonStr);
-
             return  getMerchantsFromJson(merchantJsonStr);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
@@ -131,11 +129,11 @@ public class FetchMerchantsTask extends AsyncTask<String,Void,ArrayList<Merchant
 
     @Override
     protected void onPostExecute(ArrayList<Merchant> merchants) {
-        if(merchants.size() > 0){
-            this.merchantAdapter.clear();
-            for(Merchant m : merchants){
-                this.merchantAdapter.add(m);
-            }
+        if(merchants != null && merchants.size() > 0){
+            merchantAdapter.reloadList(merchants);
+            merchantAdapter.notifyDataSetChanged();
+
+
         }
     }
 }

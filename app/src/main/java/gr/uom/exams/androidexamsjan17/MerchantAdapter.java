@@ -2,6 +2,8 @@ package gr.uom.exams.androidexamsjan17;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,57 +17,63 @@ import java.util.ArrayList;
  * Created by Thodoris on 25-Jan-17.
  */
 
-public class MerchantAdapter extends ArrayAdapter<Merchant> {
+public class MerchantAdapter extends RecyclerView.Adapter<MerchantAdapter.MerchantHolder> {
 
     private ArrayList<Merchant> merchants;
     private Context context;
 
     public MerchantAdapter(Context context, ArrayList<Merchant> objects) {
-        super(context, 0, objects);
         this.merchants = objects;
         this.context = context;
     }
 
 
-    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View rowView = convertView;
-        ViewHolder viewHolder;
-        Merchant m = merchants.get(position);
+    public MerchantHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.list_item_merchant, parent, false);
 
-        if(rowView == null){
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = inflater.inflate(R.layout.list_item_merchant, null);
-            viewHolder = new ViewHolder(rowView);
-            rowView.setTag(viewHolder);
-        }
-        else{
-            viewHolder = (ViewHolder)rowView.getTag();
-        }
-
-        viewHolder.imageView.setImageResource(R.drawable.yummy_logo);
-        viewHolder.legalNameView.setText(m.getLegalName());
-        viewHolder.categoryNameView.setText(m.getCategory());
-        viewHolder.addressView.setText(m.getAddress());
-        viewHolder.ratingView.setText(m.getReview());
-
-        return  rowView;
+        return new MerchantHolder(view);
     }
 
-    static class ViewHolder {
-        public final ImageView imageView;
-        public final TextView legalNameView;
-        public final TextView categoryNameView;
-        public final TextView addressView;
-        public final TextView ratingView;
+    @Override
+    public void onBindViewHolder(MerchantHolder holder, int position) {
 
-        public ViewHolder(View view){
-            imageView = (ImageView)view.findViewById(R.id.list_item_merchant_image);
-            legalNameView = (TextView)view.findViewById(R.id.list_item_merchant_legal_name);
-            categoryNameView = (TextView)view.findViewById(R.id.list_item_merchant_category);
-            addressView = (TextView)view.findViewById(R.id.list_item_merchant_address);
-            ratingView = (TextView)view.findViewById(R.id.list_item_merchant_review);
+        holder.imageView.setImageResource(R.drawable.yummy_logo);
+        holder.legalNameView.setText(merchants.get(position).getLegalName());
+        holder.categoryNameView.setText(merchants.get(position).getCategory());
+        holder.addressView.setText(merchants.get(position).getAddress());
+        holder.ratingView.setText(merchants.get(position).getReview());
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return merchants.size();
+    }
+
+    class MerchantHolder extends RecyclerView.ViewHolder{
+
+        private ImageView imageView;
+        private TextView legalNameView;
+        private TextView categoryNameView;
+        private TextView addressView;
+        private TextView ratingView;
+
+        public MerchantHolder(View itemView) {
+            super(itemView);
+
+            imageView = (ImageView)itemView.findViewById(R.id.list_item_merchant_image);
+            legalNameView = (TextView)itemView.findViewById(R.id.list_item_merchant_legal_name);
+            categoryNameView = (TextView)itemView.findViewById(R.id.list_item_merchant_category);
+            addressView = (TextView)itemView.findViewById(R.id.list_item_merchant_address);
+            ratingView = (TextView)itemView.findViewById(R.id.list_item_merchant_review);
         }
     }
+
+    public void reloadList(ArrayList<Merchant> merchants){
+        this.merchants.addAll(merchants);
+    }
+
+
 }

@@ -2,6 +2,9 @@ package gr.uom.exams.androidexamsjan17;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 
 
 public class MerchantFragment extends Fragment {
+
+    RecyclerView rvMerchants;
 
     MerchantAdapter merchantAdapter;
 
@@ -38,8 +43,9 @@ public class MerchantFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         merchantAdapter = new MerchantAdapter(getActivity(),new ArrayList<Merchant>());
-        ListView merchantListView = (ListView)rootView.findViewById(R.id.listview_merchants);
-        merchantListView.setAdapter(merchantAdapter);
+        rvMerchants = (RecyclerView) rootView.findViewById(R.id.recyclerView_merchants);
+        rvMerchants.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvMerchants.setAdapter(merchantAdapter);
 
         return rootView;
     }

@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     tools:context="gr.uom.exams.androidexamsjan17.MerchantFragment">
 
-    <ListView
-        android:id="@+id/listview_merchants"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_merchants"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
