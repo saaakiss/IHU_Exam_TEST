@@ -24,7 +24,7 @@ public class FetchMerchantsTask extends AsyncTask<String,Void,ArrayList<Merchant
 
     private final String LOG_TAG = FetchMerchantsTask.class.getSimpleName();
     private MerchantAdapter merchantAdapter;
-    public static final String YUMMY_BASE_DOMAIN = "http://dev.savecash.gr:3000";
+    public static final String YUMMY_BASE_DOMAIN = "https://yummywallet.com";
 
     public FetchMerchantsTask( MerchantAdapter merchantAdapter){
         this.merchantAdapter = merchantAdapter;
@@ -103,6 +103,9 @@ public class FetchMerchantsTask extends AsyncTask<String,Void,ArrayList<Merchant
                 return null;
             }
             merchantJsonStr = buffer.toString();
+
+            Log.v("Sakis" , merchantJsonStr);
+
             return  getMerchantsFromJson(merchantJsonStr);
         } catch (IOException e) {
             Log.e(LOG_TAG, "Error ", e);
