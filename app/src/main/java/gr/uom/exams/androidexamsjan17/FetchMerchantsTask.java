@@ -131,11 +131,8 @@ public class FetchMerchantsTask extends AsyncTask<String,Void,ArrayList<Merchant
 
     @Override
     protected void onPostExecute(ArrayList<Merchant> merchants) {
-        if(merchants.size() > 0){
-            this.merchantAdapter.clear();
-            for(Merchant m : merchants){
-                this.merchantAdapter.add(m);
-            }
+        if(merchants != null && merchants.size() > 0){
+            this.merchantAdapter.changeAdapter(merchants);
         }
     }
 }

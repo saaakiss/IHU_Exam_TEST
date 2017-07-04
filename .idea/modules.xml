@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidExamsJan17-solution.iml" filepath="$PROJECT_DIR$/AndroidExamsJan17-solution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IHU_Exam_TEST.iml" filepath="$PROJECT_DIR$/IHU_Exam_TEST.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
